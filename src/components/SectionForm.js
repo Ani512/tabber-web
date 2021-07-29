@@ -7,7 +7,8 @@ class SectionForm extends React.Component
         super( props );
 
         this.state = {
-
+            title: props.section ? props.section.title : '',
+            error: undefined
         };
     }
     onSectionChange = ( e ) =>
@@ -20,17 +21,27 @@ class SectionForm extends React.Component
     onSubmit = ( e ) =>
     {
         e.preventDefault();
+        if ( !this.state.title || this.state.title.length > 50 )
+        {
+            this.setState( () => ( { error: 'Please Change Section Name' } ) );
+        }
+        else 
+        {
+            this.setState( () => ( { error: undefined } ) );
 
-        this.props.addExpToDash( {
-            title: this.state.title
-        } );
+            this.props.addExpToDash( {
+                title: this.state.title
+            } );
+        }
+        e.target.reset();
     };
     render ()
     {
         return (
             <form onSubmit={ this.onSubmit }>
-                <input type="text" placeholder="Section Name" onChange={ this.onSectionChange } />
-                <button>Add</button>
+                <input type="text" placeholder="Section Name" value={ this.state.title } onChange={ this.onSectionChange } />
+                <button>Add Section</button>
+                { this.state.error ? <p>{ this.state.error }</p> : '' }
             </form>
         );
     }
