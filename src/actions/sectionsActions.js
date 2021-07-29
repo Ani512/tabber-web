@@ -1,17 +1,25 @@
-const addSection = ( sections ) => ( {
+import { v4 as uuid } from 'uuid';
+
+const addSection = ( { title = '' } = {} ) => ( {
     type: 'ADD_SECTION',
-    sections: sections
+    section: {
+        id: uuid(),
+        title: title
+    }
 } );
 
-const removeSection = ( sections ) => ( {
-    type: 'ADD_SECTION',
-    sections: sections
+const removeSection = ( { id = undefined } = {} ) => ( {
+    type: 'REMOVE_SECTION',
+    section: {
+        id: id
+    }
 } );
 
 
-const editSectionName = ( sections ) => ( {
-    type: 'ADD_SECTION',
-    sections: sections
+const editSectionName = ( id = undefined, updates ) => ( {
+    type: 'EDIT_SECTION',
+    id: id,
+    updates
 } );
 
 export { addSection, removeSection, editSectionName };

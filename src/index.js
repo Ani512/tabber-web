@@ -5,8 +5,17 @@ import { Provider } from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 import './styles/css/index.css';
 import reduxStore from './store/reduxStore';
+import { addSection } from './actions/sectionsActions';
 
 const store = reduxStore();
+
+// store.subscribe( () =>
+// {
+//   console.log( store.getState() );
+// } );
+
+store.dispatch( addSection( { title: 'Tech' } ) );
+store.dispatch( addSection( { title: 'Food' } ) );
 
 ReactDOM.render(
   <React.StrictMode>

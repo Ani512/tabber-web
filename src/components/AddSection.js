@@ -1,21 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import SectionForm from './SectionForm';
+import { addSection } from '../actions/sectionsActions';
 
-class AddSection extends React.Component
-{
-    onSubmit = () =>
-    {
+const AddSection = ( props ) => (
+    <div>
+        <p>Add a Section</p>
+        <SectionForm addExpToDash={ ( section ) =>
+        {
+            props.dispatch( addSection( section ) );
+            props.history.push( '/dash' );
+        } } />
+    </div>
+);
 
-    };
-    render ()
-    {
-        return (
-            <div>
-                <p>Add a Section</p>
-                <SectionForm />
-            </div>
-        );
-    }
-}
-
-export default AddSection;
+export default connect()( AddSection );

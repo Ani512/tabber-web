@@ -1,16 +1,19 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Section from './SingleSection';
 
-class Sections extends React.Component
-{
-    render ()
-    {
-        return (
-            <div>
-                <Section />
-            </div>
-        );
-    }
-}
+const Sections = ( props ) =>
+(
+    <div>
+        { props.section.map( ( sec ) => <Section section={ sec } key={ sec.id } /> ) }
+    </div>
+);
 
-export default Sections;
+const mapStateToProps = ( state ) =>
+{
+    return {
+        section: state.sectionsReducer
+    };
+};
+
+export default connect( mapStateToProps )( Sections );
