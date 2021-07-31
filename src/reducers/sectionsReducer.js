@@ -6,7 +6,7 @@ const sectionsReducer = ( state = sectionsReducerState, action ) =>
         case 'ADD_SECTION':
             return [
                 ...state,
-                action.section
+                action.sections
             ];
         case 'REMOVE_SECTION':
             return state.filter( ( section ) => ( section.id !== action.section.id ) );
@@ -25,6 +25,8 @@ const sectionsReducer = ( state = sectionsReducerState, action ) =>
                     return section;
                 }
             } );
+        case 'SET_SECTION':
+            return action.sections;
         default:
             return state;
     }

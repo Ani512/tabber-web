@@ -1,16 +1,18 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import SectionForm from './SectionForm';
-import { addSection } from '../actions/sectionsActions';
+import { startAddSection } from '../actions/sectionsActions';
 
 const AddSection = ( props ) => (
     <div>
-        <p>Add a Section</p>
+        <h3>Add a Section</h3>
         <SectionForm addExpToDash={ ( section ) =>
         {
-            props.dispatch( addSection( section ) );
+            props.dispatch( startAddSection( section ) );
             props.history.push( '/dash' );
         } } />
+        <Link to="/dash"><button className="btn btn-toDash">Cancel</button></Link>
     </div>
 );
 

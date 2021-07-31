@@ -1,8 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 import SectionForm from "./SectionForm";
-import { removeSection, editSectionName } from '../actions/sectionsActions';
+import { startRemoveSection, startEditSectionName } from '../actions/sectionsActions';
 
 const EditSection = ( props ) =>
 {
@@ -32,7 +33,7 @@ const EditSection = ( props ) =>
             <div>
                 <SectionForm addExpToDash={ ( section ) =>
                 {
-                    props.dispatch( editSectionName( props.section.id, section ) );
+                    props.dispatch( startEditSectionName( props.section.id, section ) );
                     props.history.push( '/dash' );
                 } }
                     section={ props.section } />
@@ -49,7 +50,7 @@ const EditSection = ( props ) =>
                         <p>You will lose ALL the data stored in the section</p>
                         <button className="btn btn-edit-page-remove" onClick={ () =>
                         {
-                            props.dispatch( removeSection( { id: props.section.id } ) );
+                            props.dispatch( startRemoveSection( { id: props.section.id } ) );
                             closeModal();
                             props.history.push( '/dash' );
                         }
@@ -57,6 +58,7 @@ const EditSection = ( props ) =>
                         <button className="btn btn-cancel-delete" onClick={ closeModal }>Cancel</button>
                     </div>
                 </Modal>
+                <Link to="/dash"><button className="btn btn-toDash">Cancel</button></Link>
             </div>
         </div>
     );
