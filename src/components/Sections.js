@@ -12,7 +12,7 @@ const Sections = ( props ) =>
 const mapStateToProps = ( state ) =>
 {
     return {
-        section: state.sectionsReducer
+        section: state.sections
     };
 };
 

@@ -1,23 +1,26 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import App from '../components/LoginPage';
+import { createBrowserHistory } from 'history';
+import { Router, Route, Switch } from 'react-router-dom';
+import Login from '../components/LoginPage';
 import Dashboard from '../components/Dashboard';
 import Page404 from '../components/Page404';
-import Header from '../components/Header';
 import AddSection from '../components/AddSection';
 import EditSection from '../components/EditSection';
+import PrivateRouter from './PrivateRouter';
+import PublicRouter from './PublicRouter';
 
-const Router = () => (
-    <BrowserRouter>
-        <Header />
+export const history = createBrowserHistory();
+
+const AppRouter = () => (
+    <Router history={ history }>
         <Switch>
-            <Route exact path="/" component={ App } />
-            <Route path="/dash" component={ Dashboard } />
-            <Route path="/addSection" component={ AddSection } />
-            <Route path="/edit/:id" component={ EditSection } />
+            <PublicRouter exact path="/" component={ Login } />
+            <PrivateRouter path="/dash" component={ Dashboard } />
+            <PrivateRouter path="/addSection" component={ AddSection } />
+            <PrivateRouter path="/edit/:id" component={ EditSection } />
             <Route component={ Page404 } />
         </Switch>
-    </BrowserRouter>
+    </Router>
 );
 
-export default Router;
+export default AppRouter;

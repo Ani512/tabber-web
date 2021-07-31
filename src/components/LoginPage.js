@@ -1,13 +1,20 @@
+import { connect } from 'react-redux';
 import '../styles/css/App.css';
-function App ()
-{
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h2>Tabber</h2>
-      </header>
-    </div>
-  );
-}
+import { startLogin } from '../actions/authActions';
 
-export default App;
+const Login = ( props ) =>
+(
+  <div className="App">
+    <header className="App-header">
+      <h2>Tabber</h2>
+      <button className="btn login-btn" onClick={ props.startLogin }>Login</button>
+    </header>
+  </div>
+);
+
+const mapDispatchToProps = ( dispatch ) => (
+  {
+    startLogin: () => dispatch( startLogin() )
+  }
+);
+export default connect( undefined, mapDispatchToProps )( Login );

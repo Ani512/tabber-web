@@ -7,14 +7,15 @@ const addSection = ( section ) => ( {
 
 const startAddSection = ( sectionData = {} ) =>
 {
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
+        const userId = getState().auth.uid;
         const {
             title = ''
         } = sectionData;
 
         let section = { title };
-        database.ref( 'sections' ).push( section ).then( ( snapshot ) =>
+        database.ref( `users/${ userId }/sections` ).push( section ).then( ( snapshot ) =>
         {
             dispatch( addSection( { id: snapshot.key, ...section } ) );
         } ).catch( ( err ) => console.log( err ) );
@@ -30,9 +31,10 @@ const setSection = ( section ) => (
 const startSetSection = () =>
 {
     let sections = [];
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
-        return database.ref( 'sections' ).once( 'value' ).then( ( snapshot ) =>
+        const userId = getState().auth.uid;
+        return database.ref( `users/${ userId }/sections` ).once( 'value' ).then( ( snapshot ) =>
         {
             snapshot.forEach( ( child ) =>
             {
@@ -42,7 +44,7 @@ const startSetSection = () =>
                 } );
             } );
             dispatch( setSection( sections ) );
-        } );
+        } ).catch( ( err ) => console.log( err ) );
     };
 };
 
@@ -55,9 +57,10 @@ const removeSection = ( { id = undefined } = {} ) => ( {
 
 const startRemoveSection = ( { id } ) =>
 {
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
-        database.ref( `sections/${ id }` ).remove().then( () => 
+        const userId = getState().auth.uid;
+        database.ref( `users/${ userId }/sections/${ id }` ).remove().then( () => 
         {
             dispatch( removeSection( { id: id } ) );
         } ).catch( ( err ) => console.log( err ) );
@@ -73,15 +76,16 @@ const editSectionName = ( id = undefined, updates ) => ( {
 
 const startEditSectionName = ( id, sectionData ) =>
 {
-    return ( dispatch ) =>
+    return ( dispatch, getState ) =>
     {
+        const userId = getState().auth.uid;
         const {
             title = '',
         } = sectionData;
 
         let section = { title };
 
-        database.ref( `sections/${ id }` ).update( section ).then( () =>
+        database.ref( `users/${ userId }/sections/${ id }` ).update( section ).then( () =>
         {
             dispatch( editSectionName( id, section ) );
         } ).catch( ( err ) =>

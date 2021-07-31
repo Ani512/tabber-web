@@ -67,7 +67,7 @@ const EditSection = ( props ) =>
 const mapStateToProps = ( state, props ) =>
 {
     return {
-        section: state.sectionsReducer.find( ( sec ) => sec.id === props.match.params.id )
+        section: state.sections.find( ( sec ) => sec.id === props.match.params.id )
     };
 };
 

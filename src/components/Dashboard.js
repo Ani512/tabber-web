@@ -29,7 +29,7 @@ class Dashboard extends React.Component
 const mapStateToProps = ( state, props ) =>
 {
     return {
-        totalNumberOfSections: totalSections( state.sectionsReducer )
+        totalNumberOfSections: totalSections( state.sections )
     };
 };
 
