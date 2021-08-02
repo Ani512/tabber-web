@@ -1,10 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Section = ( props ) =>
 (
     <div>
-        <p>{ props.section.title }</p>
+        <NavLink to={ `/${ props.section.id }` }> { props.section.title } </NavLink>
         <Link to={ `/edit/${ props.section.id }` }><button className="go-to-edit-page-button">Edit</button></Link>
     </div>
 );
