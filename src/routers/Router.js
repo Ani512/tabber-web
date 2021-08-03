@@ -22,7 +22,7 @@ const AppRouter = () => (
             <PrivateRouter path="/edit/:id" component={ EditSection } />
             <PrivateRouter exact path="/:id" component={ Home } />
             <PrivateRouter exact path="/:id/addURL" component={ AddURL } />
-            <Route component={ Page404 } />
+            <PublicRouter component={ Page404 } />
         </Switch>
     </Router>
 );
