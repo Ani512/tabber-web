@@ -3,6 +3,7 @@ import isURL from 'validator/lib/isURL';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
+import { startAddURL } from '../actions/urlActions';
 
 class AddURL extends React.Component
 {
@@ -40,6 +41,7 @@ class AddURL extends React.Component
         return (
             <div>
                 <form>
+                    <h2>{ this.props.section.title }</h2>
                     <h3>Enter a Valid URL</h3>
                     <input placeholder="URL" id="input-url" />
                     <button onClick={ ( event ) =>
@@ -60,7 +62,16 @@ class AddURL extends React.Component
                         { this.state.err === false ?
                             <div>
                                 <h3>The URL entered is VALID</h3>
-                                <button>Add URL</button>
+                                <button className="btn btn-addURL"
+                                    onClick={ () =>
+                                    {
+                                        this.props.dispatch( startAddURL(
+                                            {
+                                                url: document.getElementById( 'input-url' ).value,
+                                                sectionId: this.props.section.id
+                                            } ) );
+                                        this.props.history.push( `/${ this.props.section.id }` );
+                                    } }>Add URL</button>
                                 <button className="btn btn-cancel" onClick={ this.closeModal }>Cancel</button>
                             </div> :
                             <div>
