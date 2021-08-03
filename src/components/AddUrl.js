@@ -70,7 +70,7 @@ class AddURL extends React.Component
                                                 url: document.getElementById( 'input-url' ).value,
                                                 sectionId: this.props.section.id
                                             } ) );
-                                        this.props.history.push( `/${ this.props.section.id }` );
+                                        this.props.history.push( `/section/${ this.props.section.id }` );
                                     } }>Add URL</button>
                                 <button className="btn btn-cancel" onClick={ this.closeModal }>Cancel</button>
                             </div> :
@@ -82,7 +82,7 @@ class AddURL extends React.Component
                         }
                     </div>
                 </Modal>
-                <NavLink to={ `/${ this.props.section.id }` }><button>Cancel</button></NavLink>
+                <NavLink to={ `/section/${ this.props.section.id }` }><button>Cancel</button></NavLink>
             </div>
         );
     }

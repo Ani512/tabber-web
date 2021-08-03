@@ -17,7 +17,7 @@ class Home extends React.Component
             <div>
                 <div>
                     <h3>{ this.props.section.title }</h3>
-                    <NavLink to={ `/${ this.props.section.id }/addURL` }><button>+</button></NavLink>
+                    <NavLink to={ `/section/${ this.props.section.id }/addURL` }><button>+</button></NavLink>
                 </div>
                 <div>
                     <UrlList section={ this.props.section } />

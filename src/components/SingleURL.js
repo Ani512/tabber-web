@@ -4,7 +4,7 @@ import { startDeleteURL } from '../actions/urlActions';
 
 const SingleURL = ( props ) => (
     <div>
-        <p>{ props.data.url }</p>
+        <a href={ props.data.url } target="_blank" rel='noreferrer'>{ props.data.url }</a>
         <button className="btn delete-url" onClick={ ( e ) =>
         {
             e.preventDefault();
