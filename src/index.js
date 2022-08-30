@@ -4,7 +4,6 @@ import AppRouter from './routers/Router';
 import { Provider } from 'react-redux';
 import 'three-dots';
 import { firebase } from './firebase/firebase';
-import reportWebVitals from './reportWebVitals';
 import './styles/css/index.css';
 import reduxStore from './store/reduxStore';
 import { startSetSection } from './actions/sectionsActions';
@@ -58,8 +57,3 @@ firebase.auth().onAuthStateChanged( ( user ) =>
     history.push( '/' );
   }
 } );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
