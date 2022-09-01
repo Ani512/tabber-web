@@ -26,7 +26,7 @@ class SectionForm extends React.Component
         e.preventDefault();
         if ( !this.state.title || this.state.title.length > 50 )
         {
-            this.setState( () => ( { error: 'Please Change Section Name' } ) );
+            this.setState( () => ( { error: 'Invalid Section name. Please Edit Section Name' } ) );
         }
         else 
         {
