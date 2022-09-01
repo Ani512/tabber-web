@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button, TextField, Grid } from '@mui/material';
 
 class SectionForm extends React.Component
 {
@@ -11,6 +12,7 @@ class SectionForm extends React.Component
             error: undefined
         };
     }
+
     onSectionChange = ( e ) =>
     {
         this.setState( () =>
@@ -18,6 +20,7 @@ class SectionForm extends React.Component
             title: e.target.value
         } ) );
     };
+
     onSubmit = ( e ) =>
     {
         e.preventDefault();
@@ -33,16 +36,17 @@ class SectionForm extends React.Component
                 title: this.state.title
             } );
         }
-        e.target.reset();
+        document.getElementById("add-section-textarea").value = "";
     };
+
     render ()
     {
         return (
-            <form onSubmit={ this.onSubmit }>
-                <input type="text" placeholder="Section Name" value={ this.state.title } onChange={ this.onSectionChange } />
-                <button>Add Section</button>
+            <Grid sx={{ marginLeft: 5, marginTop: 5 }}>
+                <TextField id="add-section-textarea" label="Section Name" value={ this.state.title } variant="outlined" onChange={this.onSectionChange} />
+                <Button sx={{margin: 2}} variant="contained" color="info" onClick={this.onSubmit}>Add Section</Button>
                 { this.state.error ? <p>{ this.state.error }</p> : '' }
-            </form>
+            </Grid>
         );
     }
 }
