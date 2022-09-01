@@ -32,12 +32,12 @@ const Header = ( props ) =>
     };
 
     return (
-        <div className="header-main" style={{ backgroundColor: "#ffb74d" }}>
-            <h1 style={{ marginLeft: '45%' }}>Tabber</h1>
-            <div style={{ marginBottom: '10%' }}>
+        <div className="header-main" style={{ backgroundColor: "#ffb74d", position: 'sticky', paddingTop: '2%' }}>
+            <div style={{ marginBottom: '5%' }}>
                 <Grid container>
-                    <Grid sx={{marginLeft: '5%'}} item xs={1}><NavLink style={{ textDecoration: 'none' }} exact to="/dash" activeClassName="h-link-active">Home</NavLink></Grid>
-                    <Grid item xs={2}><NavLink style={{ textDecoration: 'none', marginLeft: '20%' }} to="/addSection" activeClassName="h-link-active">Add Section</NavLink></Grid>
+                    <Grid sx={{marginLeft: '5%', marginTop: 1}} item xs={1}><NavLink style={{ textDecoration: 'none' }} exact to="/dash" activeClassName="h-link-active">Home</NavLink></Grid>
+                    <Grid sx={{ marginTop: 1 }} item xs={2}><NavLink style={{ textDecoration: 'none', marginLeft: '20%' }} to="/addSection" activeClassName="h-link-active">Add Section</NavLink></Grid>
+                    <h1 style={{ marginLeft: '15%', marginTop: 0 }}>Tabber</h1>
                     <Box sx={{ marginLeft: 'auto', marginRight: 5, marginBottom: 5 }}><Button variant="contained" color="error" className="btn logout-btn" onClick={ openModal }>Logout</Button></Box>
                 </Grid>
                 <Modal
