@@ -1,6 +1,7 @@
 .h-link-active {
-  color: red;
-  font-style: bolder; }
+  color: #E65100;
+  font-size: larger;
+  border-bottom: solid 5px #E65100; }
 
 .header-main {
   top: 0 !important;

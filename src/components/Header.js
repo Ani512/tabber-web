@@ -1,9 +1,21 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
 import { startLogout } from '../actions/authActions';
+import { Box, Grid, Button, Modal } from '@mui/material';
 import '../styles/css/Header.css';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 const Header = ( props ) =>
 {
@@ -14,41 +26,38 @@ const Header = ( props ) =>
         setIsOpen( true );
     };
 
-    const afterOpenModal = () =>
-    {
-        // Content to be added after modal is Opened 
-        // Usually Style Changes 
-    };
-
     const closeModal = () =>
     {
         setIsOpen( false );
     };
 
     return (
-        <div className="header-main">
-            <h2>Tabber</h2>
-            <div>
-                <NavLink exact to="/dash" activeClassName="h-link-active">Home</NavLink>
-                <NavLink to="/addSection" activeClassName="h-link-active">Add Section</NavLink>
-                <button className="btn logout-btn" onClick={ openModal }>Logout</button>
+        <div className="header-main" style={{ backgroundColor: "#ffb74d" }}>
+            <h1 style={{ marginLeft: '45%' }}>Tabber</h1>
+            <div style={{ marginBottom: '10%' }}>
+                <Grid container>
+                    <Grid sx={{marginLeft: '5%'}} item xs={1}><NavLink style={{ textDecoration: 'none' }} exact to="/dash" activeClassName="h-link-active">Home</NavLink></Grid>
+                    <Grid item xs={2}><NavLink style={{ textDecoration: 'none', marginLeft: '20%' }} to="/addSection" activeClassName="h-link-active">Add Section</NavLink></Grid>
+                    <Box sx={{ marginLeft: 'auto', marginRight: 5, marginBottom: 5 }}><Button variant="contained" color="error" className="btn logout-btn" onClick={ openModal }>Logout</Button></Box>
+                </Grid>
                 <Modal
-                    isOpen={ modalIsOpen }
-                    onAfterOpen={ afterOpenModal }
-                    onRequestClose={ closeModal }
-                    contentLabel="Logout Modal"
-                    ariaHideApp={ false }
+                    open={modalIsOpen}
+                    onClose={closeModal}
+                    // sx={{ bgcolor: "#e57373" }}
+                    aria-labelledby="Logout Modal"
                 >
-                    <div>
-                        <h2>Do you want to Logout ?</h2>
-                        <button className="btn btn-logout" onClick={ () =>
-                        {
-                            props.startLogout();
-                            closeModal();
-                        }
-                        }>Logout</button>
-                        <button className="btn btn-cancel" onClick={ closeModal }>Cancel</button>
-                    </div>
+                    <Box sx={style}>
+                        <h2 style={{ marginLeft: '15%' }}>Do you want to Logout ?</h2>
+                        <Grid container sx={{ margin: 5 }}>
+                            <Grid item xs={4} sx={{ marginLeft: '7%' }}><Button variant="contained" color="info" className="btn btn-cancel" onClick={ closeModal }>Cancel</Button></Grid>
+                            <Button variant="contained" color="error" className="btn btn-logout" sx={{ marginLeft: 2}} onClick={ () =>
+                            {
+                                props.startLogout();
+                                closeModal();
+                            }
+                            }>Logout</Button>
+                        </Grid>
+                    </Box>
                 </Modal>
             </div>
         </div>
