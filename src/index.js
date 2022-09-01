@@ -13,7 +13,7 @@ import { login, logout } from './actions/authActions';
 const store = reduxStore();
 
 let loading = (
-  <div>
+  <div style={{ marginTop: '20%', marginLeft: '35%' }}>
     <h2>Loading</h2>
     <div className="dot-elastic ms-5" style={ { marginLeft: "30px" } }></div>
     <h1>Tabber</h1>

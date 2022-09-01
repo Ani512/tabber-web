@@ -13,7 +13,6 @@ class Dashboard extends React.Component
     {
         return (
             <div style={{ marginLeft: '25%', marginRight: '25%', marginBottom: '10%', height: '100%' }}>
-                <h2 style={{ marginLeft: '40%' }}>Dashboard</h2>
                 { this.props.totalNumberOfSections < 1 ?
                     <div>
                         <p>Please add a Section to Continue</p>

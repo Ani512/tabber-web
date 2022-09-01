@@ -1,9 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 import SectionForm from "./SectionForm";
 import { startRemoveSection, startEditSectionName } from '../actions/sectionsActions';
+import { Grid, Button, Box, Modal } from '@mui/material';
+
+const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 const EditSection = ( props ) =>
 {
@@ -14,53 +26,47 @@ const EditSection = ( props ) =>
         setIsOpen( true );
     };
 
-    const afterOpenModal = () =>
-    {
-        // Content to be added after modal is Opened 
-        // Usually Style Changes 
-    };
-
     const closeModal = () =>
     {
         setIsOpen( false );
     };
 
     return (
-        <div>
-            <h2>
-                Edit Section Name
-            </h2>
-            <div>
+        <Grid sx={{ marginLeft: '35%', marginTop: '10%' }}>
+            <h2 style={{ marginLeft: '2%' }}>Edit Section Name</h2>
+            <Grid>
                 <SectionForm addExpToDash={ ( section ) =>
                 {
                     props.dispatch( startEditSectionName( props.section.id, section ) );
                     props.history.push( '/dash' );
                 } }
                     section={ props.section } />
-                <button className="btn delete-section-confirm" onClick={ openModal }>Delete Section</button>
-                <Modal
-                    isOpen={ modalIsOpen }
-                    onAfterOpen={ afterOpenModal }
-                    onRequestClose={ closeModal }
-                    contentLabel="Example Modal"
-                    ariaHideApp={ false }
-                >
-                    <div>
-                        <h2>Confirm Delete ?</h2>
-                        <p>You will lose ALL the data stored in the section</p>
-                        <button className="btn btn-edit-page-remove" onClick={ () =>
-                        {
-                            props.dispatch( startRemoveSection( { id: props.section.id } ) );
-                            closeModal();
-                            props.history.push( '/dash' );
-                        }
-                        }>Delete</button>
-                        <button className="btn btn-cancel-delete" onClick={ closeModal }>Cancel</button>
-                    </div>
-                </Modal>
-                <Link to="/dash"><button className="btn btn-toDash">Cancel</button></Link>
-            </div>
-        </div>
+                <Grid sx={{ marginTop: '2%' }}> 
+                    <Button variant='contained' color='error' className="btn delete-section-confirm" onClick={ openModal }>Delete Section</Button>
+                    <Modal
+                        open={modalIsOpen}
+                        onClose={closeModal}
+                        aria-labelledby="Example Modal"
+                    >
+                        <Box sx={style}>
+                            <h2 style={{ marginLeft: '25%', marginTop: 0 }}>Confirm Delete ?</h2>
+                            <p style={{ marginLeft: '5%' }}>You will lose ALL the data stored in the section</p>
+                            <Grid sx={{ marginLeft: '25%', marginTop: '7%' }}>
+                                <Button variant='contained' color='error' className="btn btn-edit-page-remove" onClick={ () =>
+                                {
+                                    props.dispatch( startRemoveSection( { id: props.section.id } ) );
+                                    closeModal();
+                                    props.history.push( '/dash' );
+                                }
+                                }>Delete</Button>
+                                <Button variant='contained' color='info' className="btn btn-cancel-delete" sx={{ marginLeft: '5%' }} onClick={ closeModal }>Cancel</Button>
+                            </Grid>
+                        </Box>
+                    </Modal>
+                    <Link to="/dash" style={{ textDecoration: 'none', marginLeft: '2%' }}><Button variant='contained' color='info' className="btn btn-toDash">Cancel</Button></Link>
+                </Grid>   
+            </Grid>
+        </Grid>
     );
 };
 

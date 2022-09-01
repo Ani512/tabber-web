@@ -43,7 +43,6 @@ const Header = ( props ) =>
                 <Modal
                     open={modalIsOpen}
                     onClose={closeModal}
-                    // sx={{ bgcolor: "#e57373" }}
                     aria-labelledby="Logout Modal"
                 >
                     <Box sx={style}>
