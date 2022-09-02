@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Sections from './Sections';
 import { totalSections } from '../selectors/sections';
+import { Button } from '@mui/material';
 
 class Dashboard extends React.Component
 {
@@ -16,7 +17,7 @@ class Dashboard extends React.Component
                 { this.props.totalNumberOfSections < 1 ?
                     <div>
                         <p>Please add a Section to Continue</p>
-                        <Link to="/addSection"><button className="btn btn-to-add-sec">Add Section</button></Link>
+                        <Link to="/addSection" style={{ textDecoration: 'none' }}><Button variant='contained' color='info' className="btn btn-to-add-sec">Add Section</Button></Link>
                     </div>
                     : '' }
                 <Sections />
